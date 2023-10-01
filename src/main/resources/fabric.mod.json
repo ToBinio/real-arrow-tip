@@ -2,25 +2,29 @@
   "schemaVersion": 1,
   "id": "real-arrow-tip",
   "version": "${version}",
-
   "name": "Real Arrow Tip",
   "description": "",
   "authors": [],
-  "contact": {},
-
+  "contact": {
+    "repo": "https://github.com/tobia/real-arrow-tip"
+  },
   "license": "MIT",
   "icon": "assets/real-arrow-tip/icon.png",
-
   "environment": "client",
-  "entrypoints": {},
-
-      "mixins": [
-        "real-arrow-tip.mixins.json"
-      ],
-
+  "entrypoints": {
+    "client": [
+      "tobinio.realarrowtip.client.RealArrowTipClient"
+    ],
+    "main": [
+      "tobinio.realarrowtip.RealArrowTip"
+    ]
+  },
+  "mixins": [
+    "real-arrow-tip.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-        "fabric": "*",
+    "fabric": "*",
     "minecraft": "${minecraft_version}"
   }
 }
