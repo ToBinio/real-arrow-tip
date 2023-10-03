@@ -1,7 +1,0 @@
-{
-    "parent": "item/bow",
-    "textures": {
-        "layer0": "real_arrow_tip:item/bow_pulling_1",
-        "layer1": "real_arrow_tip:item/bow_pulling_1_head"
-    }
-}

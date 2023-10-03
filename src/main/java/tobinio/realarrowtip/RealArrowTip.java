@@ -23,21 +23,20 @@ public class RealArrowTip implements ModInitializer {
 
 
         // 0 = default arrow
-        // 1 = tipped arrow
-        // 2 = spectral arrow
+        // 0.1 = tipped arrow
+        // 0.2 = spectral arrow
 
         ModelPredicateProviderRegistry.register(Items.BOW, new Identifier("arrow_type"), (stack, world, entity, seed) -> {
-
             if (entity == null)
                 return 0;
 
             Item item = entity.getProjectileType(stack).getItem();
 
             if (item == Items.TIPPED_ARROW)
-                return 1;
+                return 0.1f;
 
             if (item == Items.SPECTRAL_ARROW)
-                return 2;
+                return 0.2f;
 
             return 0;
         });

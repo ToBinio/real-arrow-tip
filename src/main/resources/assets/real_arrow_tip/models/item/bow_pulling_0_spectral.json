@@ -1,0 +1,6 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "real_arrow_tip:item/bow_pulling_0_spectral"
+  }
+}

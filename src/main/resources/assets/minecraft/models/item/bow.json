@@ -100,25 +100,48 @@
     {
       "predicate": {
         "pulling": 1,
-        "arrow_type": 1
+        "arrow_type": 0.1
       },
-      "model": "real_arrow_tip:item/bow_pulling_0"
+      "model": "real_arrow_tip:item/bow_pulling_0_tipped"
     },
     {
       "predicate": {
         "pulling": 1,
-        "arrow_type": 1,
+        "arrow_type": 0.1,
         "pull": 0.65
       },
-      "model": "real_arrow_tip:item/bow_pulling_1"
+      "model": "real_arrow_tip:item/bow_pulling_1_tipped"
     },
     {
       "predicate": {
         "pulling": 1,
-        "arrow_type": 1,
+        "arrow_type": 0.1,
         "pull": 0.9
       },
-      "model": "real_arrow_tip:item/bow_pulling_2"
+      "model": "real_arrow_tip:item/bow_pulling_2_tipped"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "arrow_type": 0.2
+      },
+      "model": "real_arrow_tip:item/bow_pulling_0_spectral"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "arrow_type": 0.2,
+        "pull": 0.65
+      },
+      "model": "real_arrow_tip:item/bow_pulling_1_spectral"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "arrow_type": 0.2,
+        "pull": 0.9
+      },
+      "model": "real_arrow_tip:item/bow_pulling_2_spectral"
     }
   ]
 }

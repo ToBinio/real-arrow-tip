@@ -16,6 +16,7 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -52,6 +53,7 @@ public abstract class ProjectileEntityRendererMixin<T extends PersistentProjecti
         }
     }
 
+    @Unique
     private void vertexTint(Matrix4f positionMatrix, Matrix3f normalMatrix, VertexConsumer vertexConsumer, int x, int y,
             int z, float u, float v, int normalX, int normalZ, int normalY, int light, int red, int green, int blue) {
         vertexConsumer.vertex(positionMatrix, (float) x, (float) y, (float) z).color(red, green, blue, 255).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, (float) normalX, (float) normalY, (float) normalZ).next();
