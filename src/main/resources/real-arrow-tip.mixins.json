@@ -4,6 +4,7 @@
   "package": "tobinio.realarrowtip.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CrossbowItemInvoker"
   ],
   "client": [
     "ArrowEntityRendererMixin",
