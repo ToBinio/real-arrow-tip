@@ -33,7 +33,6 @@ public class RealArrowTip implements ModInitializer {
         Item item = entity.getProjectileType(stack).getItem();
 
         if (item == Items.TIPPED_ARROW) return 0.1f;
-
         if (item == Items.SPECTRAL_ARROW) return 0.2f;
 
         return 0;

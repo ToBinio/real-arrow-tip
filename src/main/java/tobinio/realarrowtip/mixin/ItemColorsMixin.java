@@ -5,17 +5,21 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tobinio.realarrowtip.RealArrowTip;
 
 import java.util.Optional;
 
 /**
  * Created: 03/10/2023
+ *
  * @author Tobias Frischmann
  */
 
@@ -26,21 +30,24 @@ public abstract class ItemColorsMixin {
             @Local ItemColors itemColors) {
 
         itemColors.register((stack, tintIndex) -> {
-            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            if (tintIndex != 1) return -1;
 
-            if (player == null || tintIndex != 1) return -1;
+            Entity holder = stack.getHolder();
 
-            ItemStack projectileType = player.getProjectileType(stack);
+            if (holder instanceof LivingEntity livingEntity) {
 
-            if (!(projectileType.getItem() instanceof TippedArrowItem)) return -1;
+                ItemStack projectileType = livingEntity.getProjectileType(stack);
 
-            return PotionUtil.getColor(projectileType);
+                if (projectileType.isOf(Items.TIPPED_ARROW)) {
+                    return PotionUtil.getColor(projectileType);
+                }
+            }
+
+            return -1;
         }, Items.BOW);
 
         itemColors.register((stack, tintIndex) -> {
-            ClientPlayerEntity player = MinecraftClient.getInstance().player;
-
-            if (player == null || tintIndex != 1) return -1;
+            if (tintIndex != 1) return -1;
 
             Optional<ItemStack> tippedArrow = CrossbowItemInvoker.invokerGetProjectiles(stack)
                     .stream()
