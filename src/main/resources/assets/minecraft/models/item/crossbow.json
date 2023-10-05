@@ -110,14 +110,14 @@
     {
       "predicate": {
         "charged": 1,
-        "arrow_type": 0.1
+        "tipped": 1
       },
       "model": "real_arrow_tip:item/crossbow_tipped"
     },
     {
       "predicate": {
         "charged": 1,
-        "arrow_type": 0.2
+        "spectral": 1
       },
       "model": "real_arrow_tip:item/crossbow_spectral"
     }

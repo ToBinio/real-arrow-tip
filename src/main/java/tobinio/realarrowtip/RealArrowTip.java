@@ -19,32 +19,6 @@ public class RealArrowTip implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ModelPredicateProviderRegistry.register(Items.BOW, new Identifier("arrow_type"), RealArrowTip::arrowTypeBow);
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("arrow_type"), RealArrowTip::arrowTypeCrossbow);
-    }
-
-
-    // 0 = default arrow
-    // 0.1 = tipped arrow
-    // 0.2 = spectral arrow
-    private static float arrowTypeBow(ItemStack stack, ClientWorld world, LivingEntity entity, int seed) {
-        if (entity == null) return 0;
-
-        Item item = entity.getProjectileType(stack).getItem();
-
-        if (item == Items.TIPPED_ARROW) return 0.1f;
-        if (item == Items.SPECTRAL_ARROW) return 0.2f;
-
-        return 0;
-    }
-
-    private static float arrowTypeCrossbow(ItemStack stack, ClientWorld world, LivingEntity entity, int seed) {
-
-        if (!CrossbowItem.isCharged(stack)) return 0;
-
-        if (CrossbowItem.hasProjectile(stack, Items.TIPPED_ARROW)) return 0.1f;
-        if (CrossbowItem.hasProjectile(stack, Items.SPECTRAL_ARROW)) return 0.2f;
-
-        return 0;
+        ModelPredicateProvider.initialize();
     }
 }
