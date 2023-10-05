@@ -9,13 +9,14 @@ import java.util.List;
 
 /**
  * Created: 04/10/2023
+ *
  * @author Tobias Frischmann
  */
 
 @Mixin (CrossbowItem.class)
 public interface CrossbowItemInvoker {
     @Invoker ("getProjectiles")
-    public static List<ItemStack> invokerGetProjectiles(ItemStack crossbow) {
+    static List<ItemStack> invokerGetProjectiles(ItemStack crossbow) {
         throw new AssertionError();
     }
 }

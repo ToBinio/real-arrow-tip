@@ -1,14 +1,6 @@
 package tobinio.realarrowtip;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

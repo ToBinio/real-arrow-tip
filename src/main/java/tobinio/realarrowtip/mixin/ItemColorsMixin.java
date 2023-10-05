@@ -1,14 +1,16 @@
 package tobinio.realarrowtip.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.*;
+import net.minecraft.entity.mob.StrayEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,6 +37,10 @@ public abstract class ItemColorsMixin {
             Entity holder = stack.getHolder();
 
             if (holder instanceof LivingEntity livingEntity) {
+
+                if (holder instanceof StrayEntity) {
+                    return PotionUtil.getColor(Potions.SLOWNESS);
+                }
 
                 ItemStack projectileType = livingEntity.getProjectileType(stack);
 
