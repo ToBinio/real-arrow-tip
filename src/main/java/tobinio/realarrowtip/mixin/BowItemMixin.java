@@ -17,7 +17,6 @@ public abstract class BowItemMixin extends ItemMixin {
     @Override
     protected void useOnEntity(World world, LivingEntity user, ItemStack stack, int remainingUseTicks,
             CallbackInfo ci) {
-
         stack.setHolder(user);
     }
 }

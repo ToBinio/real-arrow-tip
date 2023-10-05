@@ -21,6 +21,5 @@ public class ItemMixin {
     @Inject (method = "usageTick", at = @At (value = "HEAD"))
     protected void useOnEntity(World world, LivingEntity user, ItemStack stack, int remainingUseTicks,
             CallbackInfo ci) {
-
     }
 }

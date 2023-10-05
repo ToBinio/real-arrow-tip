@@ -8,14 +8,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.StrayEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tobinio.realarrowtip.RealArrowTip;
 
 import java.util.Optional;
 
@@ -30,7 +28,6 @@ public abstract class ItemColorsMixin {
     @Inject (method = "create", at = @At (value = "RETURN"))
     private static void create(BlockColors blockColors, CallbackInfoReturnable<ItemColors> cir,
             @Local ItemColors itemColors) {
-
         itemColors.register((stack, tintIndex) -> {
             if (tintIndex != 1) return -1;
 
