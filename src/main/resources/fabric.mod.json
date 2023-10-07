@@ -3,10 +3,15 @@
   "id": "real-arrow-tip",
   "version": "${version}",
   "name": "Real Arrow Tip",
-  "description": "",
-  "authors": [],
+  "description": "Makes bows display the correct arrow",
+  "authors": [
+    "ToBinio"
+  ],
   "contact": {
-    "repo": "https://github.com/tobia/real-arrow-tip"
+    "repo": "https://github.com/toBinio/real-arrow-tip",
+    "homepage": "https://github.com/toBinio/real-arrow-tip",
+    "issues": "https://github.com/toBinio/real-arrow-tip/issues",
+    "sources": "https://github.com/toBinio/real-arrow-tip"
   },
   "license": "MIT",
   "icon": "assets/real_arrow_tip/icon.png",
