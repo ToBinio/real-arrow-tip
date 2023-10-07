@@ -9,7 +9,7 @@
     "repo": "https://github.com/tobia/real-arrow-tip"
   },
   "license": "MIT",
-  "icon": "assets/real-arrow-tip/icon.png",
+  "icon": "assets/real_arrow_tip/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
