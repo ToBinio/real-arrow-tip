@@ -1,0 +1,2 @@
+accessWidener v2 named
+accessible method net/minecraft/entity/mob/AbstractSkeletonEntity createArrowProjectile (Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/projectile/PersistentProjectileEntity;

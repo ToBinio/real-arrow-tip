@@ -2,13 +2,9 @@
   "required": true,
   "minVersion": "0.8",
   "package": "tobinio.realarrowtip.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "BowItemMixin",
-    "CrossbowItemInvoker",
-    "ItemMixin"
-  ],
+  "compatibilityLevel": "JAVA_21",
   "client": [
+    "ArrowEntityRendererMixin",
     "ItemColorsMixin",
     "ProjectileEntityRendererMixin"
   ],
