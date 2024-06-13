@@ -3,8 +3,6 @@ package tobinio.realarrowtip;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.StrayEntity;
-import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -23,20 +21,20 @@ public class ModelPredicateProvider {
     }
 
     private static void initializeBow() {
-        ModelPredicateProviderRegistry.register(Items.BOW, new Identifier("spectral"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(Items.BOW, Identifier.ofVanilla("spectral"), (stack, world, entity, seed) -> {
             if (entity == null || !entity.isUsingItem() || entity.getActiveItem() != stack) return 0;
 
             return entity.getProjectileType(stack).isOf(Items.SPECTRAL_ARROW) ? 1 : 0;
         });
 
-        ModelPredicateProviderRegistry.register(Items.BOW, new Identifier("tipped"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(Items.BOW, Identifier.ofVanilla("tipped"), (stack, world, entity, seed) -> {
             if (entity == null || !entity.isUsingItem() || entity.getActiveItem() != stack) return 0;
 
 
             ItemStack projectile = entity.getProjectileType(stack);
 
             if (entity instanceof AbstractSkeletonEntity skeleton) {
-                projectile = skeleton.createArrowProjectile(projectile, 0).getItemStack();
+                projectile = skeleton.createArrowProjectile(projectile, 0, stack).getItemStack();
             }
 
             if (projectile.isOf(Items.TIPPED_ARROW) || projectile.get(DataComponentTypes.POTION_CONTENTS) != null) {
@@ -49,13 +47,13 @@ public class ModelPredicateProvider {
     }
 
     private static void initializeCrossbow() {
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("spectral"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(Items.CROSSBOW, Identifier.ofVanilla("spectral"), (stack, world, entity, seed) -> {
             if (!CrossbowItem.isCharged(stack) || entity == null) return 0;
 
             return entity.getProjectileType(stack).isOf(Items.SPECTRAL_ARROW) ? 1 : 0;
         });
 
-        ModelPredicateProviderRegistry.register(Items.CROSSBOW, new Identifier("tipped"), (stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(Items.CROSSBOW, Identifier.ofVanilla("tipped"), (stack, world, entity, seed) -> {
             if (!CrossbowItem.isCharged(stack) || entity == null) return 0;
 
             if (entity.getProjectileType(stack).isOf(Items.TIPPED_ARROW)) {

@@ -1,6 +1,7 @@
 package tobinio.realarrowtip;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,4 +14,9 @@ public class RealArrowTip implements ModInitializer {
     public void onInitialize() {
         ModelPredicateProvider.initialize();
     }
+
+    public static Identifier id(String path) {
+        return Identifier.of(modID, path);
+    }
+
 }

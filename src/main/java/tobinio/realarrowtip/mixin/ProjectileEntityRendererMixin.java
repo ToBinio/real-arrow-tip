@@ -23,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tobinio.realarrowtip.RealArrowTip;
 
+import static tobinio.realarrowtip.RealArrowTip.id;
+
 @Mixin (ProjectileEntityRenderer.class)
 public abstract class ProjectileEntityRendererMixin<T extends PersistentProjectileEntity> {
     @Inject (at = @At (value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V", shift = At.Shift.BEFORE), method = "render(Lnet/minecraft/entity/projectile/PersistentProjectileEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
@@ -40,7 +42,7 @@ public abstract class ProjectileEntityRendererMixin<T extends PersistentProjecti
             int blue = ColorHelper.Argb.getBlue(color);
             int green = ColorHelper.Argb.getGreen(color);
 
-            VertexConsumer headVertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(new Identifier(RealArrowTip.modID, "textures/entity/projectiles/tipped_arrow_head.png")));
+            VertexConsumer headVertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(id("textures/entity/projectiles/tipped_arrow_head.png")));
 
             for (int u = 0; u < 4; ++u) {
                 matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
@@ -60,7 +62,6 @@ public abstract class ProjectileEntityRendererMixin<T extends PersistentProjecti
                 .texture(u, v)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(light)
-                .normal(matrixStack.peek(), (float) normalX, (float) normalY, (float) normalZ)
-                .next();
+                .normal(matrixStack.peek(), (float) normalX, (float) normalY, (float) normalZ);
     }
 }

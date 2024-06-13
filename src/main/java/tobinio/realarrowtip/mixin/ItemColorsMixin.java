@@ -38,7 +38,7 @@ public abstract class ItemColorsMixin {
                 ItemStack projectile = livingEntity.getProjectileType(stack);
 
                 if (livingEntity instanceof AbstractSkeletonEntity skeleton) {
-                    projectile = skeleton.createArrowProjectile(projectile, 0).getItemStack();
+                    projectile = skeleton.createArrowProjectile(projectile, 0, stack).getItemStack();
                 }
 
                 PotionContentsComponent potion = projectile.get(DataComponentTypes.POTION_CONTENTS);
