@@ -2,6 +2,7 @@ package tobinio.realarrowtip;
 
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ChargedProjectilesComponent;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -50,13 +51,23 @@ public class ModelPredicateProvider {
         ModelPredicateProviderRegistry.register(Items.CROSSBOW, Identifier.ofVanilla("spectral"), (stack, world, entity, seed) -> {
             if (!CrossbowItem.isCharged(stack) || entity == null) return 0;
 
-            return entity.getProjectileType(stack).isOf(Items.SPECTRAL_ARROW) ? 1 : 0;
+            ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
+            var isSpectral = chargedProjectiles.getProjectiles()
+                    .stream()
+                    .anyMatch(itemStack -> itemStack.isOf(Items.SPECTRAL_ARROW));
+
+            return isSpectral ? 1 : 0;
         });
 
         ModelPredicateProviderRegistry.register(Items.CROSSBOW, Identifier.ofVanilla("tipped"), (stack, world, entity, seed) -> {
             if (!CrossbowItem.isCharged(stack) || entity == null) return 0;
 
-            if (entity.getProjectileType(stack).isOf(Items.TIPPED_ARROW)) {
+            ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
+            var isTipped = chargedProjectiles.getProjectiles()
+                    .stream()
+                    .anyMatch(itemStack -> itemStack.isOf(Items.TIPPED_ARROW));
+
+            if (isTipped) {
                 stack.setHolder(entity);
                 return 1;
             }

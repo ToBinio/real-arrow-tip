@@ -13,6 +13,7 @@ public class RealArrowTip implements ModInitializer {
     @Override
     public void onInitialize() {
         ModelPredicateProvider.initialize();
+        ColorProvider.initialize();
     }
 
     public static Identifier id(String path) {
