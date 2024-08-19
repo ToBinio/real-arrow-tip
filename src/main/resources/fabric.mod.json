@@ -18,9 +18,6 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "tobinio.realarrowtip.client.RealArrowTipClient"
-    ],
-    "main": [
       "tobinio.realarrowtip.RealArrowTip"
     ]
   },
