@@ -49,7 +49,7 @@ public class ModelPredicateProvider {
 
     private static void initializeCrossbow() {
         ModelPredicateProviderRegistry.register(Items.CROSSBOW, Identifier.ofVanilla("spectral"), (stack, world, entity, seed) -> {
-            if (!CrossbowItem.isCharged(stack) || entity == null) return 0;
+            if (!CrossbowItem.isCharged(stack)) return 0;
 
             ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
             var isSpectral = chargedProjectiles.getProjectiles()
@@ -60,7 +60,7 @@ public class ModelPredicateProvider {
         });
 
         ModelPredicateProviderRegistry.register(Items.CROSSBOW, Identifier.ofVanilla("tipped"), (stack, world, entity, seed) -> {
-            if (!CrossbowItem.isCharged(stack) || entity == null) return 0;
+            if (!CrossbowItem.isCharged(stack)) return 0;
 
             ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
             var isTipped = chargedProjectiles.getProjectiles()

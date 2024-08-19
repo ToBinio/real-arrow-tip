@@ -38,7 +38,6 @@ public class ColorProvider {
         }, Items.BOW);
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-
             if (tintIndex != 1) return -1;
 
             ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT);
