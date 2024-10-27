@@ -51,6 +51,6 @@ public class ColorProvider {
     }
 
     private static int getColorFromStack(ItemStack stack) {
-        return ColorHelper.Argb.fullAlpha((stack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT)).getColor());
+        return ColorHelper.fullAlpha((stack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT)).getColor());
     }
 }

@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
+import net.minecraft.client.render.entity.state.ArrowEntityRenderState;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
@@ -18,7 +19,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tobinio.realarrowtip.HasColor;
 
 /**
  * Created: 03/10/2023
@@ -28,12 +31,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin (ArrowEntityRenderer.class)
 public abstract class ArrowEntityRendererMixin {
-    /**
-     * @author to_binio
-     * @reason vanilla code does not work and is not used anywhere this fixes it
-     */
-    @Overwrite
-    public Identifier getTexture(ArrowEntity arrowEntity) {
-        return arrowEntity.getColor() != -1 ? ArrowEntityRenderer.TIPPED_TEXTURE : ArrowEntityRenderer.TEXTURE;
+    @Inject (at = @At ("TAIL"), method = "updateRenderState(Lnet/minecraft/entity/projectile/ArrowEntity;Lnet/minecraft/client/render/entity/state/ArrowEntityRenderState;F)V")
+    private void updateRenderState(ArrowEntity arrowEntity, ArrowEntityRenderState arrowEntityRenderState, float f,
+            CallbackInfo ci) {
+        ((HasColor) arrowEntityRenderState).real_arrow_tip$setColor(arrowEntity.getColor());
     }
 }
