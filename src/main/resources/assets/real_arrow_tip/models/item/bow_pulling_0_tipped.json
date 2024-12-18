@@ -1,7 +1,7 @@
 {
   "parent": "item/bow",
   "textures": {
-    "layer0": "real_arrow_tip:item/bow_pulling_0_base_tipped",
-    "layer1": "real_arrow_tip:item/bow_pulling_0_head_tipped"
+    "layer0": "real_arrow_tip:item/bow_pulling_0_head_tipped",
+    "layer1": "real_arrow_tip:item/bow_pulling_0_base_tipped"
   }
 }

@@ -1,0 +1,115 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/bow"
+    },
+    "on_true": {
+      "type": "minecraft:select",
+      "cases": [
+        {
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "entries": [
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "real_arrow_tip:item/bow_pulling_1_spectral"
+                },
+                "threshold": 0.65
+              },
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "real_arrow_tip:item/bow_pulling_2_spectral"
+                },
+                "threshold": 0.9
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "real_arrow_tip:item/bow_pulling_0_spectral"
+            },
+            "property": "minecraft:use_duration",
+            "scale": 0.05
+          },
+          "when": "spectral"
+        },
+        {
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "entries": [
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "real_arrow_tip:item/bow_pulling_1_tipped",
+                  "tints": [
+                    {
+                      "type": "real_arrow_tip:bow",
+                      "default": -13083194
+                    }
+                  ]
+                },
+                "threshold": 0.65
+              },
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "real_arrow_tip:item/bow_pulling_2_tipped",
+                  "tints": [
+                    {
+                      "type": "real_arrow_tip:bow",
+                      "default": -13083194
+                    }
+                  ]
+                },
+                "threshold": 0.9
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "real_arrow_tip:item/bow_pulling_0_tipped",
+              "tints": [
+                {
+                  "type": "real_arrow_tip:bow",
+                  "default": -13083194
+                }
+              ]
+            },
+            "property": "minecraft:use_duration",
+            "scale": 0.05
+          },
+          "when": "tipped"
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:range_dispatch",
+        "entries": [
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "minecraft:item/bow_pulling_1"
+            },
+            "threshold": 0.65
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "minecraft:item/bow_pulling_2"
+            },
+            "threshold": 0.9
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/bow_pulling_0"
+        },
+        "property": "minecraft:use_duration",
+        "scale": 0.05
+      },
+      "property": "real_arrow_tip:bow_charge_type"
+    },
+    "property": "minecraft:using_item"
+  }
+}
