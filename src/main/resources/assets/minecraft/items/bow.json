@@ -46,7 +46,7 @@
                   "model": "real_arrow_tip:item/bow_pulling_1_tipped",
                   "tints": [
                     {
-                      "type": "real_arrow_tip:bow",
+                      "type": "real_arrow_tip:projectile",
                       "default": -13083194
                     }
                   ]
@@ -59,7 +59,7 @@
                   "model": "real_arrow_tip:item/bow_pulling_2_tipped",
                   "tints": [
                     {
-                      "type": "real_arrow_tip:bow",
+                      "type": "real_arrow_tip:projectile",
                       "default": -13083194
                     }
                   ]
@@ -72,7 +72,7 @@
               "model": "real_arrow_tip:item/bow_pulling_0_tipped",
               "tints": [
                 {
-                  "type": "real_arrow_tip:bow",
+                  "type": "real_arrow_tip:projectile",
                   "default": -13083194
                 }
               ]
@@ -108,7 +108,7 @@
         "property": "minecraft:use_duration",
         "scale": 0.05
       },
-      "property": "real_arrow_tip:bow_charge_type"
+      "property": "real_arrow_tip:charge_type"
     },
     "property": "minecraft:using_item"
   }

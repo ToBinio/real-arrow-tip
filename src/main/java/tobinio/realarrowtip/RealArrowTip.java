@@ -10,10 +10,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tobinio.realarrowtip.model.charge.BowChargeTypeProperty;
-import tobinio.realarrowtip.model.charge.CrossbowChargeTypeProperty;
-import tobinio.realarrowtip.model.tint.BowTintSource;
-import tobinio.realarrowtip.model.tint.CrossbowTintSource;
+import tobinio.realarrowtip.model.charge.ChargeTypeProperty;
+import tobinio.realarrowtip.model.tint.TintSource;
 
 public class RealArrowTip implements ClientModInitializer {
     public static String modID = "real_arrow_tip";
@@ -22,11 +20,8 @@ public class RealArrowTip implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        SelectProperties.ID_MAPPER.put(id("crossbow_charge_type"), CrossbowChargeTypeProperty.TYPE);
-        SelectProperties.ID_MAPPER.put(id("bow_charge_type"), BowChargeTypeProperty.TYPE);
-
-        TintSourceTypes.ID_MAPPER.put(id("bow"), BowTintSource.CODEC);
-        TintSourceTypes.ID_MAPPER.put(id("crossbow"), CrossbowTintSource.CODEC);
+        SelectProperties.ID_MAPPER.put(id("charge_type"), ChargeTypeProperty.TYPE);
+        TintSourceTypes.ID_MAPPER.put(id("projectile"), TintSource.CODEC);
     }
 
     public static Identifier id(String path) {
