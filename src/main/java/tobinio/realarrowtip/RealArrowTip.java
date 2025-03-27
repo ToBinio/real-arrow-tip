@@ -10,8 +10,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tobinio.realarrowtip.model.charge.ChargeTypeProperty;
-import tobinio.realarrowtip.model.tint.TintSource;
+import tobinio.realarrowtip.model.ChargeTypeProperty;
+import tobinio.realarrowtip.model.TintSource;
 
 public class RealArrowTip implements ClientModInitializer {
     public static String modID = "real_arrow_tip";

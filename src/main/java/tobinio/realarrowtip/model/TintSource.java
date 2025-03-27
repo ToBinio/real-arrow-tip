@@ -1,4 +1,4 @@
-package tobinio.realarrowtip.model.tint;
+package tobinio.realarrowtip.model;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

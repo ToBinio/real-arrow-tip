@@ -1,16 +1,21 @@
 {
   "model": {
     "type": "minecraft:condition",
+    "property": "minecraft:using_item",
     "on_false": {
       "type": "minecraft:model",
       "model": "minecraft:item/bow"
     },
     "on_true": {
       "type": "minecraft:select",
+      "property": "real_arrow_tip:charge_type",
       "cases": [
         {
+          "when": "minecraft:spectral_arrow",
           "model": {
             "type": "minecraft:range_dispatch",
+            "property": "minecraft:use_duration",
+            "scale": 0.05,
             "entries": [
               {
                 "model": {
@@ -30,15 +35,15 @@
             "fallback": {
               "type": "minecraft:model",
               "model": "real_arrow_tip:item/bow_pulling_0_spectral"
-            },
-            "property": "minecraft:use_duration",
-            "scale": 0.05
-          },
-          "when": "spectral"
+            }
+          }
         },
         {
+          "when": "minecraft:tipped_arrow",
           "model": {
             "type": "minecraft:range_dispatch",
+            "property": "minecraft:use_duration",
+            "scale": 0.05,
             "entries": [
               {
                 "model": {
@@ -76,15 +81,14 @@
                   "default": -13083194
                 }
               ]
-            },
-            "property": "minecraft:use_duration",
-            "scale": 0.05
-          },
-          "when": "tipped"
+            }
+          }
         }
       ],
       "fallback": {
         "type": "minecraft:range_dispatch",
+        "property": "minecraft:use_duration",
+        "scale": 0.05,
         "entries": [
           {
             "model": {
@@ -104,12 +108,8 @@
         "fallback": {
           "type": "minecraft:model",
           "model": "minecraft:item/bow_pulling_0"
-        },
-        "property": "minecraft:use_duration",
-        "scale": 0.05
-      },
-      "property": "real_arrow_tip:charge_type"
-    },
-    "property": "minecraft:using_item"
+        }
+      }
+    }
   }
 }
