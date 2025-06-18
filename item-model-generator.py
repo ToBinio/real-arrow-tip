@@ -107,17 +107,32 @@ def create_bow():
     print(f"created: {output_file}")
 
 
-def generate_crossbow_arrow_json(arrow_data):
+def generate_crossbow_arrow_json(arrow_data, namespace, multishot_namespace):
     model = {
         "model": {
-            "type": "minecraft:model",
-            "model": f"real_arrow_tip:item/crossbow_{arrow_data["name"]}",
+            "type": "minecraft:condition",
+            "property": "minecraft:component",
+            "predicate": "minecraft:enchantments",
+            "value": [
+                {
+                    "enchantments": "minecraft:multishot"
+                }
+            ],
+            "on_true": {
+                "type": "minecraft:model",
+                "model": f"{multishot_namespace}:item/crossbow_{arrow_data["name"]}_multishot",
+            },
+            "on_false": {
+                "type": "minecraft:model",
+                "model": f"{namespace}:item/crossbow_{arrow_data["name"]}",
+            }
         },
         "when": arrow_data["item"]
     }
 
     if arrow_data["tint"] is not None:
-        model["model"]["tints"] = [{"type": "real_arrow_tip:projectile", "default": arrow_data["tint"]}]
+        model["model"]["on_true"]["tints"] = [{"type": "real_arrow_tip:projectile", "default": arrow_data["tint"]}]
+        model["model"]["on_false"]["tints"] = [{"type": "real_arrow_tip:projectile", "default": arrow_data["tint"]}]
 
     return model
 
@@ -127,22 +142,7 @@ def create_crossbow():
         "model": {
             "type": "minecraft:select",
             "property": "real_arrow_tip:charge_type",
-            "cases": [
-                {
-                    "model": {
-                        "type": "minecraft:model",
-                        "model": "minecraft:item/crossbow_arrow"
-                    },
-                    "when": "minecraft:arrow"
-                },
-                {
-                    "model": {
-                        "type": "minecraft:model",
-                        "model": "minecraft:item/crossbow_firework"
-                    },
-                    "when": "minecraft:firework_rocket"
-                }
-            ],
+            "cases": [],
             "fallback": {
                 "type": "minecraft:condition",
                 "property": "minecraft:using_item",
@@ -178,8 +178,13 @@ def create_crossbow():
         }
     }
 
+    arrow_json = generate_crossbow_arrow_json({"item": "minecraft:arrow", "name": "arrow", "tint": None}, "minecraft","real_arrow_tip")
+    json_structure["model"]["cases"].append(arrow_json)
+    arrow_json = generate_crossbow_arrow_json({"item": "minecraft:firework_rocket", "name": "firework", "tint": None}, "minecraft","real_arrow_tip")
+    json_structure["model"]["cases"].append(arrow_json)
+
     for arrow in ARROW_TYPES:
-        arrow_json = generate_crossbow_arrow_json(arrow)
+        arrow_json = generate_crossbow_arrow_json(arrow, "real_arrow_tip","real_arrow_tip")
         if arrow_json:
             json_structure["model"]["cases"].append(arrow_json)
 
