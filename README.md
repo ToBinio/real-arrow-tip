@@ -16,7 +16,11 @@ all arrows show their true selves
 
 ---
 
-### Supporting more Arrows 
+## Supporting Mod in Texturepacks
+
+Adding support for this mod in your own Texturepack can easily be done by overwriting the textures in the `real_arrow_tip` namespace see [Textures](src/main/resources/assets/real_arrow_tip/textures)
+
+## Supporting more Arrows 
 
 This mod adds a new `real_arrow_tip:charge_type` for the crossbow and bow item. It sets the item identifier of the currently used arrow as its value, making it possible to support any arrow.
 
@@ -24,6 +28,6 @@ The texture pack needs to include the required arrow textures (see this mod’s 
 
 To create these `.json` files, you can use `item-model-generator.py.` Simply add the new arrows, and the `.json` files will be generated.
 
-Note:
-Supporting modded arrows is outside the scope of this mod.
-Feel free to publish any resource pack that adds compatibility for modded arrows.
+> Notice:<br>
+> Supporting other Texturepacks or modded arrows is outside the scope of this mod.
+> Feel free to publish any resource pack that adds compatibility for Texturepacks or modded arrows.
