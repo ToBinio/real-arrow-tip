@@ -31,7 +31,7 @@ public abstract class ProjectileEntityRendererMixin<T extends PersistentProjecti
     private ArrowEntityModel model;
 
     @Inject (at = @At (value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"), method = "render(Lnet/minecraft/client/render/entity/state/ProjectileEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
-    private void render(ProjectileEntityRenderState projectileEntityRenderState, MatrixStack matrixStack,
+    private void real_arrow_tip$render(ProjectileEntityRenderState projectileEntityRenderState, MatrixStack matrixStack,
             VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
 
         if (projectileEntityRenderState instanceof ArrowEntityRenderState arrowEntity) {
