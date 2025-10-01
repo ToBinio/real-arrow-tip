@@ -29,7 +29,9 @@ public class RealArrowTip implements ClientModInitializer {
     }
 
     public static int getColorFromStack(ItemStack stack) {
-        return ColorHelper.fullAlpha((stack.getOrDefault(DataComponentTypes.POTION_CONTENTS,
-                PotionContentsComponent.DEFAULT)).getColor());
+        PotionContentsComponent component = stack.get(DataComponentTypes.POTION_CONTENTS);
+        if(component == null) return -1;
+
+        return ColorHelper.fullAlpha(component.getColor());
     }
 }
