@@ -4,13 +4,15 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.client.render.entity.model.ArrowEntityModel;
 import net.minecraft.client.render.entity.state.ArrowEntityRenderState;
 import net.minecraft.client.render.entity.state.ProjectileEntityRenderState;
-import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.util.math.ColorHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,14 +25,14 @@ import tobinio.realarrowtip.HasColor;
 import static tobinio.realarrowtip.RealArrowTip.id;
 
 @Mixin (ProjectileEntityRenderer.class)
-public abstract class ProjectileEntityRendererMixin<S extends ProjectileEntityRenderState> {
+public abstract class ProjectileEntityRendererMixin<T extends PersistentProjectileEntity> {
     @Shadow
     @Final
     private ArrowEntityModel model;
 
-    @Inject (at = @At (value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"), method = "render(Lnet/minecraft/client/render/entity/state/ProjectileEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/render/state/CameraRenderState;)V")
-    private void real_arrow_tip$render(S projectileEntityRenderState, MatrixStack matrixStack,
-            OrderedRenderCommandQueue orderedRenderCommandQueue, CameraRenderState cameraRenderState, CallbackInfo ci) {
+    @Inject (at = @At (value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"), method = "render(Lnet/minecraft/client/render/entity/state/ProjectileEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
+    private void real_arrow_tip$render(ProjectileEntityRenderState projectileEntityRenderState, MatrixStack matrixStack,
+            VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
 
         if (projectileEntityRenderState instanceof ArrowEntityRenderState arrowEntity) {
             int color = ColorHelper.fullAlpha(((HasColor) arrowEntity).real_arrow_tip$getColor());
@@ -38,19 +40,10 @@ public abstract class ProjectileEntityRendererMixin<S extends ProjectileEntityRe
             if (color == -1)
                 return;
 
-            orderedRenderCommandQueue.submitModel(
-                        this.model,
-                        projectileEntityRenderState,
-                        matrixStack,
-                        RenderLayer.getEntityCutout(id(
-                                "textures/entity/projectiles/tipped_arrow_head.png")),
-                        projectileEntityRenderState.light,
-                        OverlayTexture.DEFAULT_UV,
-                        color,
-                        null,
-                        projectileEntityRenderState.outlineColor,
-                        null
-                );
+            VertexConsumer headVertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(id(
+                    "textures/entity/projectiles/tipped_arrow_head.png")));
+
+            this.model.render(matrixStack, headVertexConsumer, i, OverlayTexture.DEFAULT_UV, color);
         }
     }
 }

@@ -16,8 +16,6 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static tobinio.realarrowtip.RealArrowTip.getColorFromStack;
-
 /**
  * Created: 18.12.24
  *
@@ -53,7 +51,7 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
                 projectile = skeleton.createArrowProjectile(projectile, 0, stack).getItemStack();
             }
 
-            return getProjectileType(projectile);
+            return projectile.getRegistryEntry().getIdAsString();
         }
 
         return "none";
@@ -65,19 +63,8 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
             return "none";
         } else {
             ItemStack projectile = chargedProjectilesComponent.getProjectiles().getFirst();
-            return getProjectileType(projectile);
+            return projectile.getRegistryEntry().getIdAsString();
         }
-    }
-
-    private static String getProjectileType(ItemStack projectile) {
-        var color = getColorFromStack(projectile);
-
-        // needed since stray & bogged shoot normal arrow with effect
-        if(color != -1 && projectile.isOf(Items.ARROW)) {
-            return Items.TIPPED_ARROW.getRegistryEntry().getIdAsString();
-        }
-
-        return projectile.getRegistryEntry().getIdAsString();
     }
 
     @Override

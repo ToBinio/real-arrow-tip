@@ -55,13 +55,12 @@ public record TintSource(int defaultColor) implements net.minecraft.client.rende
     private @NotNull Integer getTintCrossbow(ItemStack stack) {
         ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES,
                 ChargedProjectilesComponent.DEFAULT);
-
-        return chargedProjectiles.getProjectiles()
+        Optional<ItemStack> tippedArrow = chargedProjectiles.getProjectiles()
                 .stream()
-                .map(RealArrowTip::getColorFromStack)
-                .filter(color -> color != -1)
-                .findFirst()
-                .orElse(this.defaultColor);
+                .filter(itemStack -> itemStack.isOf(Items.TIPPED_ARROW))
+                .findFirst();
+
+        return tippedArrow.map(RealArrowTip::getColorFromStack).orElse(this.defaultColor);
     }
 
 
