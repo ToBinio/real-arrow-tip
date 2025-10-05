@@ -10,9 +10,9 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ChargedProjectilesComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.ModelTransformationMode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +35,7 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
 
     @Override
     public String getValue(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity user,
-            int seed, ItemDisplayContext displayContext) {
+            int seed, ModelTransformationMode modelTransformationMode) {
 
         if (stack.isOf(Items.BOW)) {
             return getChargeTypeBow(stack, user);
@@ -65,11 +65,6 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
             ItemStack projectile = chargedProjectilesComponent.getProjectiles().getFirst();
             return projectile.getRegistryEntry().getIdAsString();
         }
-    }
-
-    @Override
-    public Codec<String> valueCodec() {
-        return VALUE_CODEC;
     }
 
     @Override

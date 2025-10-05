@@ -21,8 +21,8 @@ import tobinio.realarrowtip.RealArrowTip;
 public class ItemAssetsLoaderMixin {
 
     @Inject(method = "method_65926", at= @At (value = "INVOKE", target = "Lnet/minecraft/resource/Resource;getReader()Ljava/io/BufferedReader;"))
-    private static void real_arrow_tip$useOwnItemModels(Identifier itemId, Resource resource,
-            DynamicRegistryManager.Immutable immutable, CallbackInfoReturnable<ItemAssetsLoader.Definition> cir,
+    private static void real_arrow_tip$useOwnItemModels(Identifier id, Resource resource,
+            CallbackInfoReturnable<ItemAssetsLoader.Definition> cir,
             @Local(ordinal = 1) LocalRef<Identifier> identifier) {
         if (identifier.get().getNamespace().equals(RealArrowTip.MOD_ID)) {
             identifier.set(Identifier.of(identifier.get().getPath()));
