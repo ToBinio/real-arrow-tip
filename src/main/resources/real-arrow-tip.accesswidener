@@ -1,2 +1,3 @@
 accessWidener v2 named
+accessible class net/minecraft/client/item/ItemAssetsLoader$Definition
 accessible method net/minecraft/entity/mob/AbstractSkeletonEntity createArrowProjectile (Lnet/minecraft/item/ItemStack;FLnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/projectile/PersistentProjectileEntity;

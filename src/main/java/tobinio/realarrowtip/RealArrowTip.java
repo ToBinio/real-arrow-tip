@@ -14,7 +14,7 @@ import tobinio.realarrowtip.model.ChargeTypeProperty;
 import tobinio.realarrowtip.model.TintSource;
 
 public class RealArrowTip implements ClientModInitializer {
-    public static String modID = "real_arrow_tip";
+    public static String MOD_ID = "real_arrow_tip";
 
     public static final Logger LOGGER = LoggerFactory.getLogger("Real Arrow Tip");
 
@@ -25,7 +25,7 @@ public class RealArrowTip implements ClientModInitializer {
     }
 
     public static Identifier id(String path) {
-        return Identifier.of(modID, path);
+        return Identifier.of(MOD_ID, path);
     }
 
     public static int getColorFromStack(ItemStack stack) {
