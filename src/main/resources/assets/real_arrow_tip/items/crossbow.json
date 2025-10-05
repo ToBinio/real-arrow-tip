@@ -5,97 +5,35 @@
     "cases": [
       {
         "model": {
-          "type": "minecraft:condition",
-          "property": "minecraft:component",
-          "predicate": "minecraft:enchantments",
-          "value": [
-            {
-              "enchantments": "minecraft:multishot"
-            }
-          ],
-          "on_true": {
-            "type": "minecraft:model",
-            "model": "real_arrow_tip:item/crossbow_arrow_multishot"
-          },
-          "on_false": {
-            "type": "minecraft:model",
-            "model": "minecraft:item/crossbow_arrow"
-          }
+          "type": "minecraft:model",
+          "model": "minecraft:item/crossbow_arrow"
         },
         "when": "minecraft:arrow"
       },
       {
         "model": {
-          "type": "minecraft:condition",
-          "property": "minecraft:component",
-          "predicate": "minecraft:enchantments",
-          "value": [
-            {
-              "enchantments": "minecraft:multishot"
-            }
-          ],
-          "on_true": {
-            "type": "minecraft:model",
-            "model": "real_arrow_tip:item/crossbow_firework_multishot"
-          },
-          "on_false": {
-            "type": "minecraft:model",
-            "model": "minecraft:item/crossbow_firework"
-          }
+          "type": "minecraft:model",
+          "model": "minecraft:item/crossbow_firework"
         },
         "when": "minecraft:firework_rocket"
       },
       {
         "model": {
-          "type": "minecraft:condition",
-          "property": "minecraft:component",
-          "predicate": "minecraft:enchantments",
-          "value": [
-            {
-              "enchantments": "minecraft:multishot"
-            }
-          ],
-          "on_true": {
-            "type": "minecraft:model",
-            "model": "real_arrow_tip:item/crossbow_spectral_multishot"
-          },
-          "on_false": {
-            "type": "minecraft:model",
-            "model": "real_arrow_tip:item/crossbow_spectral"
-          }
+          "type": "minecraft:model",
+          "model": "real_arrow_tip:item/crossbow_spectral"
         },
         "when": "minecraft:spectral_arrow"
       },
       {
         "model": {
-          "type": "minecraft:condition",
-          "property": "minecraft:component",
-          "predicate": "minecraft:enchantments",
-          "value": [
+          "type": "minecraft:model",
+          "model": "real_arrow_tip:item/crossbow_tipped",
+          "tints": [
             {
-              "enchantments": "minecraft:multishot"
+              "type": "real_arrow_tip:projectile",
+              "default": -13083194
             }
-          ],
-          "on_true": {
-            "type": "minecraft:model",
-            "model": "real_arrow_tip:item/crossbow_tipped_multishot",
-            "tints": [
-              {
-                "type": "real_arrow_tip:projectile",
-                "default": -13083194
-              }
-            ]
-          },
-          "on_false": {
-            "type": "minecraft:model",
-            "model": "real_arrow_tip:item/crossbow_tipped",
-            "tints": [
-              {
-                "type": "real_arrow_tip:projectile",
-                "default": -13083194
-              }
-            ]
-          }
+          ]
         },
         "when": "minecraft:tipped_arrow"
       }

@@ -1,7 +1,0 @@
-{
-  "parent": "item/crossbow",
-  "textures": {
-    "layer0": "real_arrow_tip:item/crossbow_tipped_head_multishot",
-    "layer1": "real_arrow_tip:item/crossbow_tipped_base_multishot"
-  }
-}
