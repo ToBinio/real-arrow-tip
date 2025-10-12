@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tobinio.realarrowtip.config.Config;
 import tobinio.realarrowtip.model.ChargeTypeProperty;
 import tobinio.realarrowtip.model.TintSource;
 
@@ -20,6 +21,8 @@ public class RealArrowTip implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        Config.HANDLER.load();
+
         SelectProperties.ID_MAPPER.put(id("charge_type"), ChargeTypeProperty.TYPE);
         TintSourceTypes.ID_MAPPER.put(id("projectile"), TintSource.CODEC);
     }
