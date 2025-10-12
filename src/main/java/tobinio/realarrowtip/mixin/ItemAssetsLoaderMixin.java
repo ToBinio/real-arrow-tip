@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tobinio.realarrowtip.RealArrowTip;
+import tobinio.realarrowtip.config.Config;
 
 /**
  * Created: 05.10.25
@@ -24,7 +25,13 @@ public class ItemAssetsLoaderMixin {
     private static void real_arrow_tip$useOwnItemModels(Identifier id, Resource resource,
             CallbackInfoReturnable<ItemAssetsLoader.Definition> cir,
             @Local(ordinal = 1) LocalRef<Identifier> identifier) {
+        Config config = Config.HANDLER.instance();
+
         if (identifier.get().getNamespace().equals(RealArrowTip.MOD_ID)) {
+            if( config.ignoredItems.contains(identifier.get().getPath())) {
+                return;
+            }
+
             identifier.set(Identifier.of(identifier.get().getPath()));
         }
     }

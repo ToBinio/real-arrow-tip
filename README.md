@@ -4,7 +4,7 @@ a fabric mod which makes the bow display the correct arrow
 
 The time has ended where your bow simply shoots a different arrow than displayed!
 
-## features
+## Features
 
 all arrows show their true selves
 
@@ -13,6 +13,10 @@ all arrows show their true selves
 - Crossbow displays correct colored tip when shooting tipped arrows
 - Crossbow displays spectral arrows
 - Arrow entity displays colored tip when it's a tipped arrow
+
+## Texturepacks supporting this mod
+
+* [Bray's Better 3D Bow](https://modrinth.com/resourcepack/brays-better-3d-bow)
 
 ---
 
@@ -31,3 +35,5 @@ To create these `.json` files, you can use `item-model-generator.py.` Simply add
 > Notice:<br>
 > Supporting other Texturepacks or modded arrows is outside the scope of this mod.
 > Feel free to publish any resource pack that adds compatibility for Texturepacks or modded arrows.
+> 
+> In case you do, please let me know so the Texturepack can be added to the list.

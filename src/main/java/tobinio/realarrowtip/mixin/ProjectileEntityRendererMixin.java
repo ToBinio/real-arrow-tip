@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tobinio.realarrowtip.HasColor;
+import tobinio.realarrowtip.config.Config;
 
 import static tobinio.realarrowtip.RealArrowTip.id;
 
@@ -33,6 +34,10 @@ public abstract class ProjectileEntityRendererMixin<T extends PersistentProjecti
     @Inject (at = @At (value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;pop()V"), method = "render(Lnet/minecraft/client/render/entity/state/ProjectileEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     private void real_arrow_tip$render(ProjectileEntityRenderState projectileEntityRenderState, MatrixStack matrixStack,
             VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+
+        if (!Config.HANDLER.instance().renderCustomArrowEntity) {
+            return;
+        }
 
         if (projectileEntityRenderState instanceof ArrowEntityRenderState arrowEntity) {
             int color = ColorHelper.fullAlpha(((HasColor) arrowEntity).real_arrow_tip$getColor());

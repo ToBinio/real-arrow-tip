@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tobinio.realarrowtip.HasColor;
+import tobinio.realarrowtip.config.Config;
 
 import static tobinio.realarrowtip.RealArrowTip.id;
 
@@ -36,6 +37,10 @@ public abstract class ArrowEntityRendererMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void real_arrow_tip$setTippedArrowTexture(CallbackInfo ci) {
+        if (!Config.HANDLER.instance().renderCustomArrowEntity) {
+            return;
+        }
+
         TIPPED_TEXTURE = id("textures/entity/projectiles/tipped_arrow.png");
     }
 }
