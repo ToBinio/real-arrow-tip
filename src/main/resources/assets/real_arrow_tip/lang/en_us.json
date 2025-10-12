@@ -1,0 +1,8 @@
+{
+  "real-arrow-tip.config.title": "Real Arrow Tip",
+  "real-arrow-tip.config.category-title": "Real Arrow Tip [Requires Game Restart]",
+  "real-arrow-tip.config.render-custom-arrow-entity.name": "Render Custom Arrow Entity",
+  "real-arrow-tip.config.render-custom-arrow-entity.description": "Disable rendering of the colored arrow tip on Arrow entities",
+  "real-arrow-tip.config.config.ignored-items.name": "Ignored Items",
+  "real-arrow-tip.config.config.ignored-items.description": "Disable rendering of custom item models.\nSpecify items by name, e.g. 'bow'"
+}

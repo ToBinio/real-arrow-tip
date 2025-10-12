@@ -19,6 +19,9 @@
   "entrypoints": {
     "client": [
       "tobinio.realarrowtip.RealArrowTip"
+    ],
+    "modmenu": [
+      "tobinio.realarrowtip.config.ConfigMenu"
     ]
   },
   "mixins": [
