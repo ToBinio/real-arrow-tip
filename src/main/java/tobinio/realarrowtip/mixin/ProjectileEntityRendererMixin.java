@@ -4,6 +4,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.client.render.entity.model.ArrowEntityModel;
@@ -44,18 +46,18 @@ public abstract class ProjectileEntityRendererMixin<S extends ProjectileEntityRe
                 return;
 
             orderedRenderCommandQueue.submitModel(
-                        this.model,
-                        projectileEntityRenderState,
-                        matrixStack,
-                        RenderLayer.getEntityCutout(id(
-                                "textures/entity/projectiles/tipped_arrow_head.png")),
-                        projectileEntityRenderState.light,
-                        OverlayTexture.DEFAULT_UV,
-                        color,
-                        null,
-                        projectileEntityRenderState.outlineColor,
-                        null
-                );
+                    this.model,
+                    projectileEntityRenderState,
+                    matrixStack,
+                    RenderLayers.entityCutout(id(
+                            "textures/entity/projectiles/tipped_arrow_head.png")),
+                    projectileEntityRenderState.light,
+                    OverlayTexture.DEFAULT_UV,
+                    color,
+                    null,
+                    projectileEntityRenderState.outlineColor,
+                    null
+            );
         }
     }
 }
