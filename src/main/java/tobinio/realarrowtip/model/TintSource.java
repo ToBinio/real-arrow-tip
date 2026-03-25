@@ -56,7 +56,7 @@ public record TintSource(int defaultColor) implements net.minecraft.client.color
         ChargedProjectiles chargedProjectiles = stack.getOrDefault(DataComponents.CHARGED_PROJECTILES,
                 ChargedProjectiles.EMPTY);
 
-        return chargedProjectiles.getItems()
+        return chargedProjectiles.itemCopies()
                 .stream()
                 .map(RealArrowTip::getColorFromStack)
                 .filter(color -> color != -1)

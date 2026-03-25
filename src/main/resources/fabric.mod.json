@@ -30,7 +30,7 @@
   "accessWidener": "real-arrow-tip.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": ">=1.21"
   }
 }

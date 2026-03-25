@@ -1,17 +1,13 @@
 package tobinio.realarrowtip.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.model.object.projectile.ArrowModel;
 import net.minecraft.client.renderer.entity.state.TippableArrowRenderState;
 import net.minecraft.client.renderer.entity.state.ArrowRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Final;
@@ -31,8 +27,8 @@ public abstract class ArrowRendererMixin<S extends ArrowRenderState> {
     @Final
     private ArrowModel model;
 
-    @Inject (at = @At (value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"), method = "submit(Lnet/minecraft/client/renderer/entity/state/ArrowRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V")
-    private void real_arrow_tip$render(S projectileEntityRenderState, PoseStack matrixStack,
+    @Inject (at = @At (value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"), method = "submit(Lnet/minecraft/client/renderer/entity/state/ArrowRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V")
+    private void real_arrow_tip$submit(S projectileEntityRenderState, PoseStack matrixStack,
             SubmitNodeCollector orderedRenderCommandQueue, CameraRenderState cameraRenderState, CallbackInfo ci) {
 
         if (!Config.HANDLER.instance().renderCustomArrowEntity) {

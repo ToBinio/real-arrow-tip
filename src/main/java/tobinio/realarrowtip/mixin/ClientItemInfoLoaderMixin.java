@@ -21,7 +21,7 @@ import tobinio.realarrowtip.config.Config;
 @Mixin (ClientItemInfoLoader.class)
 public class ClientItemInfoLoaderMixin {
 
-    @Inject(method = "method_65926", at= @At (value = "INVOKE", target = "Lnet/minecraft/server/packs/resources/Resource;openAsReader()Ljava/io/BufferedReader;"))
+    @Inject(method = "lambda$scheduleLoad$3", at= @At (value = "INVOKE", target = "Lnet/minecraft/server/packs/resources/Resource;openAsReader()Ljava/io/BufferedReader;"))
     private static void real_arrow_tip$useOwnItemModels(Identifier itemId, Resource resource,
             RegistryAccess.Frozen immutable, CallbackInfoReturnable<ClientItemInfoLoader.PendingLoad> cir,
             @Local(ordinal = 1) LocalRef<Identifier> identifier) {

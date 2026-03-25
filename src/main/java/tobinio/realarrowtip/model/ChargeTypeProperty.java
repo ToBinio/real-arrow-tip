@@ -64,7 +64,7 @@ public record ChargeTypeProperty() implements SelectItemModelProperty<String> {
         if (chargedProjectilesComponent == null || chargedProjectilesComponent.isEmpty()) {
             return "none";
         } else {
-            ItemStack projectile = chargedProjectilesComponent.getItems().getFirst();
+            ItemStack projectile = chargedProjectilesComponent.itemCopies().getFirst();
             return getProjectileType(projectile);
         }
     }
@@ -77,7 +77,7 @@ public record ChargeTypeProperty() implements SelectItemModelProperty<String> {
             return Items.TIPPED_ARROW.builtInRegistryHolder().getRegisteredName();
         }
 
-        return projectile.getItemHolder().getRegisteredName();
+        return projectile.getItem().toString();
     }
 
     @Override
