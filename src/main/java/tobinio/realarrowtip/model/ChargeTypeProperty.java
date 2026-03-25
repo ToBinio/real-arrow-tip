@@ -4,15 +4,15 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.item.property.select.SelectProperty;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ChargedProjectilesComponent;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperty;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,22 +24,22 @@ import static tobinio.realarrowtip.RealArrowTip.getColorFromStack;
  * @author Tobias Frischmann
  */
 @Environment (EnvType.CLIENT)
-public record ChargeTypeProperty() implements SelectProperty<String> {
-    public static final SelectProperty.Type<ChargeTypeProperty, String> TYPE;
+public record ChargeTypeProperty() implements SelectItemModelProperty<String> {
+    public static final SelectItemModelProperty.Type<ChargeTypeProperty, String> TYPE;
     public static final Codec<String> VALUE_CODEC;
 
     static {
         VALUE_CODEC = Codec.STRING;
-        TYPE = SelectProperty.Type.create(
+        TYPE = SelectItemModelProperty.Type.create(
                 MapCodec.unit(new ChargeTypeProperty()), VALUE_CODEC
         );
     }
 
     @Override
-    public String getValue(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity user,
+    public String get(ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity user,
             int seed, ItemDisplayContext displayContext) {
 
-        if (stack.isOf(Items.BOW)) {
+        if (stack.is(Items.BOW)) {
             return getChargeTypeBow(stack, user);
         }
         return getChargeTypeCrossbow(stack);
@@ -47,10 +47,10 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
 
     private static @NotNull String getChargeTypeBow(ItemStack stack, @Nullable LivingEntity user) {
         if (user != null) {
-            ItemStack projectile = user.getProjectileType(stack);
+            ItemStack projectile = user.getProjectile(stack);
 
-            if (user instanceof AbstractSkeletonEntity skeleton) {
-                projectile = skeleton.createArrowProjectile(projectile, 0, stack).getItemStack();
+            if (user instanceof AbstractSkeleton skeleton) {
+                projectile = skeleton.getArrow(projectile, 0, stack).getPickupItemStackOrigin();
             }
 
             return getProjectileType(projectile);
@@ -60,11 +60,11 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
     }
 
     private static String getChargeTypeCrossbow(ItemStack stack) {
-        ChargedProjectilesComponent chargedProjectilesComponent = stack.get(DataComponentTypes.CHARGED_PROJECTILES);
+        ChargedProjectiles chargedProjectilesComponent = stack.get(DataComponents.CHARGED_PROJECTILES);
         if (chargedProjectilesComponent == null || chargedProjectilesComponent.isEmpty()) {
             return "none";
         } else {
-            ItemStack projectile = chargedProjectilesComponent.getProjectiles().getFirst();
+            ItemStack projectile = chargedProjectilesComponent.getItems().getFirst();
             return getProjectileType(projectile);
         }
     }
@@ -73,11 +73,11 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
         var color = getColorFromStack(projectile);
 
         // needed since stray & bogged shoot normal arrow with effect
-        if(color != -1 && projectile.isOf(Items.ARROW)) {
-            return Items.TIPPED_ARROW.getRegistryEntry().getIdAsString();
+        if(color != -1 && projectile.is(Items.ARROW)) {
+            return Items.TIPPED_ARROW.builtInRegistryHolder().getRegisteredName();
         }
 
-        return projectile.getRegistryEntry().getIdAsString();
+        return projectile.getItemHolder().getRegisteredName();
     }
 
     @Override
@@ -86,7 +86,7 @@ public record ChargeTypeProperty() implements SelectProperty<String> {
     }
 
     @Override
-    public SelectProperty.Type<ChargeTypeProperty, String> getType() {
+    public SelectItemModelProperty.Type<ChargeTypeProperty, String> type() {
         return TYPE;
     }
 }

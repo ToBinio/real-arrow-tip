@@ -1,13 +1,13 @@
 package tobinio.realarrowtip;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.render.item.property.select.SelectProperties;
-import net.minecraft.client.render.item.tint.TintSourceTypes;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.ColorHelper;
+import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperties;
+import net.minecraft.client.color.item.ItemTintSources;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tobinio.realarrowtip.config.Config;
@@ -23,18 +23,18 @@ public class RealArrowTip implements ClientModInitializer {
     public void onInitializeClient() {
         Config.HANDLER.load();
 
-        SelectProperties.ID_MAPPER.put(id("charge_type"), ChargeTypeProperty.TYPE);
-        TintSourceTypes.ID_MAPPER.put(id("projectile"), TintSource.CODEC);
+        SelectItemModelProperties.ID_MAPPER.put(id("charge_type"), ChargeTypeProperty.TYPE);
+        ItemTintSources.ID_MAPPER.put(id("projectile"), TintSource.CODEC);
     }
 
     public static Identifier id(String path) {
-        return Identifier.of(MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static int getColorFromStack(ItemStack stack) {
-        PotionContentsComponent component = stack.get(DataComponentTypes.POTION_CONTENTS);
+        PotionContents component = stack.get(DataComponents.POTION_CONTENTS);
         if(component == null) return -1;
 
-        return ColorHelper.fullAlpha(component.getColor());
+        return ARGB.opaque(component.getColor());
     }
 }

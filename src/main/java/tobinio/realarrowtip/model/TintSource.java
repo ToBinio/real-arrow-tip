@@ -2,15 +2,15 @@ package tobinio.realarrowtip.model;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ChargedProjectilesComponent;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.math.ColorHelper;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.ARGB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tobinio.realarrowtip.RealArrowTip;
@@ -24,15 +24,15 @@ import static tobinio.realarrowtip.RealArrowTip.getColorFromStack;
  *
  * @author Tobias Frischmann
  */
-public record TintSource(int defaultColor) implements net.minecraft.client.render.item.tint.TintSource {
+public record TintSource(int defaultColor) implements net.minecraft.client.color.item.ItemTintSource {
     public static final MapCodec<TintSource> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(Codecs.RGB.fieldOf("default").forGetter(TintSource::defaultColor))
+            instance -> instance.group(ExtraCodecs.RGB_COLOR_CODEC.fieldOf("default").forGetter(TintSource::defaultColor))
                     .apply(instance, TintSource::new)
     );
 
     @Override
-    public int getTint(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity user) {
-        if (stack.isOf(Items.BOW)) {
+    public int calculate(ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity user) {
+        if (stack.is(Items.BOW)) {
             return getTintBow(stack, user);
         }
         return getTintCrossbow(stack);
@@ -40,23 +40,23 @@ public record TintSource(int defaultColor) implements net.minecraft.client.rende
 
     private int getTintBow(ItemStack stack, @Nullable LivingEntity user) {
         if (user != null) {
-            ItemStack projectile = user.getProjectileType(stack);
+            ItemStack projectile = user.getProjectile(stack);
 
-            if (user instanceof AbstractSkeletonEntity skeleton) {
-                projectile = skeleton.createArrowProjectile(projectile, 0, stack).getItemStack();
+            if (user instanceof AbstractSkeleton skeleton) {
+                projectile = skeleton.getArrow(projectile, 0, stack).getPickupItemStackOrigin();
             }
 
             return getColorFromStack(projectile);
         }
 
-        return ColorHelper.fullAlpha(this.defaultColor);
+        return ARGB.opaque(this.defaultColor);
     }
 
     private @NotNull Integer getTintCrossbow(ItemStack stack) {
-        ChargedProjectilesComponent chargedProjectiles = stack.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES,
-                ChargedProjectilesComponent.DEFAULT);
+        ChargedProjectiles chargedProjectiles = stack.getOrDefault(DataComponents.CHARGED_PROJECTILES,
+                ChargedProjectiles.EMPTY);
 
-        return chargedProjectiles.getProjectiles()
+        return chargedProjectiles.getItems()
                 .stream()
                 .map(RealArrowTip::getColorFromStack)
                 .filter(color -> color != -1)
@@ -66,7 +66,7 @@ public record TintSource(int defaultColor) implements net.minecraft.client.rende
 
 
     @Override
-    public MapCodec<TintSource> getCodec() {
+    public MapCodec<TintSource> type() {
         return CODEC;
     }
 }
