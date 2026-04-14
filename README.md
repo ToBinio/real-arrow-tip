@@ -1,3 +1,7 @@
+# **This Project has moved to [Tangled](https://tangled.org/tobinio.dev/real-arrow-tip)**
+
+---
+
 # Real Arrow Tip
 
 a fabric mod which makes the bow display the correct arrow
